@@ -52,7 +52,7 @@ export default class MainPage extends React.Component<IAppProps> {
                 <MedicationPage />
               </Route>
               <Route exact path="/findings">
-                <FindingsPage />
+                <FindingsPage currentDate={this.state.currentDate} />
               </Route>
               <Route exact path="/community">
                 <CommunityPage />
