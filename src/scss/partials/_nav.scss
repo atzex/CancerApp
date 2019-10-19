@@ -1,7 +1,9 @@
 $cn: 'bottom-nav';
 
-$cn-h: 50px;
+$cn-h: 66px;
 $cn-bgc: #f8f8f8;
+$cn-fs: 12px;
+$cn-fc: #747474;
 
 .#{$cn} {
   position: fixed;
@@ -12,20 +14,22 @@ $cn-bgc: #f8f8f8;
   display: flex;
   align-items: center;
   background-color: $cn-bgc;
-  border-top: 1px solid darken($cn-bgc, 10%);
+  border-top: 1px solid darken($cn-bgc, 5%);
+  font-size: $cn-fs;
 
   &__item {
     flex: 0 0 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     height: $cn-h;
   }
 
   &__item-link {
-    color: $body-color;
+    height: $cn-h;
+    color: $cn-fc;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       text-decoration: none;
@@ -34,6 +38,10 @@ $cn-bgc: #f8f8f8;
     &.is-active {
       color: $primary;
       font-weight: bold;
+    }
+
+    svg {
+      margin-bottom: 5px;
     }
   }
 }
