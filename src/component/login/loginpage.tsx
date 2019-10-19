@@ -82,6 +82,7 @@ export default class LoginPage extends React.Component<ILoginPageProps> {
 
         if (email.length && this.validateEmail(email) && password.length) {
           localStorage.login = '1';
+          localStorage.loginEmail = email;
           this.setState({ loginError: false, loginErrorMsg: null });
           this.props.stateCallback({ loggedIn: 1 });
         } else {
