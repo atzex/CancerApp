@@ -1,0 +1,19 @@
+$cn: 'btn';
+
+.#{$cn} {
+  &.#{$cn}-primary {
+    &.is-gradient {
+      background: $btn-primary-gradient;
+    }
+
+    &.has-shadow {
+      box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &.#{$cn}-lg {
+    min-height: $form-control-h;
+    font-size: $font-size-base;
+    font-weight: bold;
+  }
+}

@@ -13,8 +13,10 @@ export interface IAppProps {}
 
 export default class MainPage extends React.Component<IAppProps> {
   state = {
-    currentDate: 0
+    currentDate: 0,
+    loggedIn: localStorage.login
   };
+
   changeDate = (date: number) => {
     this.setState({
       currentDate: date
@@ -24,7 +26,7 @@ export default class MainPage extends React.Component<IAppProps> {
   public render() {
     return (
       <div className="App">
-        {!localStorage.login && <LoginPage />}
+        {!localStorage.login && <LoginPage stateCallback={this.stateCallback} loggedIn={this.state.loggedIn} />}
         {localStorage.login === '1' && (
           <div>
             <HeaderComponent onDateChange={this.changeDate} />
@@ -48,4 +50,8 @@ export default class MainPage extends React.Component<IAppProps> {
       </div>
     );
   }
+
+  stateCallback = (obj: {}): void => {
+    this.setState(obj);
+  };
 }
