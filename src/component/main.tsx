@@ -1,4 +1,5 @@
 import * as React from 'react';
+import HeaderComponent from './header/header';
 import LoginPage from './login/loginpage';
 import DiaryPage from './modules/diary';
 import MedicationPage from './modules/medication';
@@ -11,15 +12,25 @@ import { Switch, Route } from 'react-router-dom';
 export interface IAppProps {}
 
 export default class MainPage extends React.Component<IAppProps> {
+  state = {
+    currentDate: 0
+  };
+  changeDate = (date: number) => {
+    this.setState({
+      currentDate: date
+    });
+  };
+
   public render() {
     return (
       <div className="App">
         {!localStorage.login && <LoginPage />}
         {localStorage.login === '1' && (
           <div>
+            <HeaderComponent onDateChange={this.changeDate} />
             <Switch>
               <Route exact path="/">
-                <DiaryPage />
+                <DiaryPage currentDate={this.state.currentDate} />
               </Route>
               <Route exact path="/medication">
                 <MedicationPage />
