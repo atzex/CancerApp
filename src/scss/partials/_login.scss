@@ -5,7 +5,7 @@ $cn-bar-h: $bottom-bar-h;
 
 .#{$cn} {
   background: $primary-gradient;
-  height: 100vh;
+  min-height: 100vh;
 
   &__logo {
     width: 140px;
@@ -97,6 +97,16 @@ $cn-bar-h: $bottom-bar-h;
       color: #fff;
       font-weight: bold;
       font-size: 15px;
+    }
+  }
+
+  @media (max-height: 600px) {
+    > .container {
+      padding-bottom: $gutter;
+    }
+
+    &-nav {
+      position: static;
     }
   }
 }

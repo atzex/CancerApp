@@ -33,19 +33,27 @@ export default class LoginPage extends React.Component<ILoginPageProps> {
               <label className="sr-only" htmlFor="email">
                 E-Mail
               </label>
-              <input type="email" ref={this.ref.emailRef} className="form-control" id="email" name="email" placeholder="E-Mail" />
+              <input type="email" ref={this.ref.emailRef} className="form-control" id="email" name="email" onKeyDown={this.handleKeyDown()} placeholder="E-Mail" />
               <Icon.Mail />
             </div>
             <div className="form-group col-12">
               <label className="sr-only" htmlFor="password">
                 Password
               </label>
-              <input type="password" ref={this.ref.passwordRef} className="form-control" id="password" name="password" placeholder="Password" />
+              <input
+                type="password"
+                ref={this.ref.passwordRef}
+                className="form-control"
+                id="password"
+                name="password"
+                onKeyDown={this.handleKeyDown()}
+                placeholder="Password"
+              />
               <Icon.Key />
             </div>
             {this.state.loginError && this.state.loginErrorMsg && <LoginError message={this.state.loginErrorMsg} />}
             <div className="col-12">
-              <button type="button" className="btn btn-primary is-gradient has-shadow btn-block btn-lg" onClick={this.tryLogin()}>
+              <button type="button" className="btn btn-primary has-gradient has-shadow btn-block btn-lg" onClick={this.tryLogin()}>
                 Sign In
               </button>
             </div>
@@ -54,6 +62,16 @@ export default class LoginPage extends React.Component<ILoginPageProps> {
         <LoginBottomBar />
       </div>
     );
+  }
+
+  handleKeyDown() {
+    return (e: any) => {
+      if (e && e.key === 'Enter') {
+        this.tryLogin()();
+      } else {
+        return;
+      }
+    };
   }
 
   tryLogin() {

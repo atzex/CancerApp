@@ -14,6 +14,10 @@ config({
 });
 
 const App: React.FC = () => {
+  if (localStorage.darkMode === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+
   return (
     <Router>
       <MainPage />

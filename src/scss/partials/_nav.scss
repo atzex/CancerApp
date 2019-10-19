@@ -1,9 +1,9 @@
 $cn: 'bottom-nav';
 
 $cn-h: $bottom-bar-h;
-$cn-bgc: #f8f8f8;
+$cn-bgc: $bar-bgc;
 $cn-fs: 12px;
-$cn-fc: #747474;
+$cn-c: $nav-c;
 
 .#{$cn} {
   position: fixed;
@@ -24,7 +24,7 @@ $cn-fc: #747474;
 
   &__item-link {
     height: $cn-h;
-    color: $cn-fc;
+    color: $cn-c;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -42,6 +42,18 @@ $cn-fc: #747474;
 
     svg {
       margin-bottom: 5px;
+    }
+  }
+
+  body.dark-mode & {
+    $cn-bgc: $bar-bgc-dm;
+    $cn-c: $nav-c-dm;
+
+    background-color: $cn-bgc;
+    border-top: 1px solid lighten($cn-bgc, 5%);
+
+    &__item-link {
+      color: $cn-c;
     }
   }
 }

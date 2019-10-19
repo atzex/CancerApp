@@ -1,0 +1,16 @@
+$cn: 'header';
+
+$cn-bgc: $bar-bgc;
+$cn-c: #747474;
+
+.#{$cn} {
+  background-color: $cn-bgc;
+  border-bottom: 1px solid darken($cn-bgc, 5%);
+  height: $header-h;
+
+  body.dark-mode & {
+    $cn-bgc: $bar-bgc-dm;
+    background-color: $cn-bgc;
+    border-bottom: 1px solid lighten($cn-bgc, 5%);
+  }
+}

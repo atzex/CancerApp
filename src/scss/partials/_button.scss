@@ -2,7 +2,7 @@ $cn: 'btn';
 
 .#{$cn} {
   &.#{$cn}-primary {
-    &.is-gradient {
+    &.has-gradient {
       background: $btn-primary-gradient;
     }
 
@@ -15,5 +15,8 @@ $cn: 'btn';
     min-height: $form-control-h;
     font-size: $font-size-base;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
