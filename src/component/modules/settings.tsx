@@ -11,6 +11,8 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
     darkMode: this.props.darkMode
   };
 
+  loginEmail = localStorage.loginEmail ? localStorage.loginEmail : 'demo@bastion.de';
+
   public render() {
     return (
       <div className="settings">
@@ -25,7 +27,7 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
           <div className="row">
             <div className="col-12 text-center">
               <p>
-                You are signed in as: <strong>demo@bastion.de</strong>
+                You are signed in as: <strong>{this.loginEmail}</strong>
               </p>
               <button type="button" className="btn btn-primary has-gradient has-shadow btn-block btn-lg" onClick={this.signOut()}>
                 Sign Out
@@ -47,6 +49,7 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
   signOut = () => {
     return (e: any) => {
       localStorage.removeItem('login');
+      localStorage.removeItem('loginEmail');
       this.props.stateCallback && this.props.stateCallback({ loggedIn: false });
       this.props.history.push('/');
     };
