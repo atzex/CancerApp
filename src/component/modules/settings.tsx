@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface ISettingsPageProps {
   stateCallback(obj: {}): void;
   darkMode: boolean;
+  history?: any;
 }
 
 export default class SettingsPage extends React.Component<ISettingsPageProps> {
@@ -39,14 +40,15 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
   toggleDarkMode = () => {
     return (e: any) => {
       this.setState({ darkMode: !this.state.darkMode });
-      this.props.stateCallback({ darkMode: !this.state.darkMode });
+      this.props.stateCallback && this.props.stateCallback({ darkMode: !this.state.darkMode });
     };
   };
 
   signOut = () => {
     return (e: any) => {
       localStorage.removeItem('login');
-      this.props.stateCallback({ loggedIn: false });
+      this.props.stateCallback && this.props.stateCallback({ loggedIn: false });
+      this.props.history.push('/');
     };
   };
 }

@@ -57,9 +57,13 @@ export default class MainPage extends React.Component<IAppProps> {
               <Route exact path="/community">
                 <CommunityPage />
               </Route>
-              <Route exact path="/settings">
-                <SettingsPage darkMode={this.state.darkMode} stateCallback={this.stateCallback} />
-              </Route>
+              <Route
+                exact
+                path="/settings"
+                component={(props: any) => {
+                  return <SettingsPage darkMode={this.state.darkMode} stateCallback={this.stateCallback} {...props} />;
+                }}
+              ></Route>
             </Switch>
             <BottomNavComponent />
           </div>
