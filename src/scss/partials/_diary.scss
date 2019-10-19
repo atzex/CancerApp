@@ -1,0 +1,117 @@
+$cn: 'diary';
+
+$cn-bgc: #f8f8f8;
+$cn-t-c: #979797;
+
+.#{$cn} {
+  padding-top: $gutter / 2;
+  padding-bottom: $bottom-bar-h;
+  overflow-y: auto;
+  max-height: calc(100vh - #{$bottom-bar-h} - #{$header-h});
+
+  &__new-entry {
+    position: fixed;
+    top: $header-h;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - #{$header-h} - #{$bottom-bar-h});
+    background-color: rgba($body-bg, 0.9);
+    z-index: 2500;
+    padding: $gutter / 2;
+  }
+
+  &__new-entry-textarea {
+    @extend .form-control;
+    margin-bottom: $gutter / 2;
+    min-height: calc(100vh - #{$header-h} - #{$bottom-bar-h} - 64px - 64px - #{$gutter * 2});
+  }
+
+  &__entry-list {
+    position: relative;
+  }
+
+  &__entry {
+    position: relative;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background-color: $cn-bgc;
+    margin-bottom: $gutter / 3 * 2;
+    padding: $gutter / 2;
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.1);
+    margin-left: $gutter * 1.25;
+
+    &:first-child {
+      &:after {
+        top: 50%;
+        height: calc(50% + #{$gutter / 3 * 2} + 2px);
+      }
+    }
+
+    &:last-child {
+      &:after {
+        height: 50%;
+      }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      left: -$gutter * 1.25;
+      top: 50%;
+      margin-top: -8px;
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: $primary;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      left: -$gutter * 1.25 + 8px;
+      top: 0;
+      height: calc(100% + #{$gutter / 3 * 2} + 2px);
+      width: 1px;
+      background-color: $border-color;
+    }
+  }
+
+  &__entry-time {
+    font-size: 13px;
+    text-align: right;
+    display: block;
+    color: $cn-t-c;
+  }
+
+  body.dark-mode & {
+    $cn-bgc-dm: #0e0e0e;
+    $cn-t-c-dm: #555555;
+
+    &__new-entry {
+      background-color: rgba($body-bg-dm, 0.95);
+    }
+
+    &__new-entry-textarea {
+      background-color: #000;
+      border-color: lighten(#000, 10%);
+    }
+
+    &__entry {
+      border: 1px solid invert($border-color);
+      background-color: $cn-bgc-dm;
+      box-shadow: 0 5px 7px 0 rgba(255, 255, 255, 0.03);
+      color: $body-color-dm;
+
+      &:after {
+        background-color: invert($border-color);
+      }
+    }
+
+    &__entry-time {
+      color: $cn-t-c-dm;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+$cn: 'settings';
+
+.#{$cn} {
+  background: $primary-gradient;
+  min-height: 100vh;
+  color: #fff;
+
+  > .container {
+    padding-top: $gutter;
+
+    > .row {
+      margin-bottom: $gutter * 2;
+    }
+  }
+
+  body.dark-mode & {
+    background: none;
+  }
+}

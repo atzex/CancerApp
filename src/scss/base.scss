@@ -1,3 +1,11 @@
 .form-control {
   height: $form-control-h;
 }
+
+.dx-overlay-content {
+  background: $btn-primary-gradient;
+}
+
+body.dark-mode {
+  background-color: $body-bg-dm;
+}

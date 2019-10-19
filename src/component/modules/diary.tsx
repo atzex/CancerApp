@@ -46,6 +46,7 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
 
   onAddEntryButtonClicked = () => {
     this.setState({ addNew: true });
+    this.textareaRef.current && this.textareaRef.current.focus();
   };
 
   onCancelButtonClicked = () => {
@@ -68,24 +69,37 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
 
   public render() {
     return (
-      <div>
-        {this.state.addNew && (
-          <div>
-            <textarea ref={this.textareaRef}></textarea>
-            <Button onClick={this.onCancelButtonClicked}>Cancel</Button>
-            <Button onClick={this.onSaveButtonClicked}>Save</Button>
-            {this.state.processing && <span>Doing things ... </span>}
+      <div className="diary">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              {this.state.addNew && (
+                <div className="diary__new-entry">
+                  <textarea className="diary__new-entry-textarea" ref={this.textareaRef} placeholder="Please type..."></textarea>
+                  <Button className="btn btn-primary has-gradient btn-lg btn-block" onClick={this.onSaveButtonClicked}>
+                    Save
+                  </Button>
+                  <Button className="btn btn-link btn-lg btn-block" onClick={this.onCancelButtonClicked}>
+                    Cancel
+                  </Button>
+                  {this.state.processing && <span>Doing things ... </span>}
+                </div>
+              )}
+              <div className="diary__entry-list">
+                {this.state.entries.map((value: any) => {
+                  return (
+                    <div className="diary__entry" key={value.objectId}>
+                      <div className="diary__entry-message">
+                        <p>{value.entry}</p>
+                      </div>
+                      <time className="diary__entry-time">{moment(value.entrydate).format('hh:mm:ss a')}</time>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        )}
-        <ul>
-          {this.state.entries.map((value: any) => {
-            return (
-              <li key={value.objectId}>
-                {value.entrydate} - {value.entry}
-              </li>
-            );
-          })}
-        </ul>
+        </div>
         <SpeedDialAction icon={'add'} onClick={this.onAddEntryButtonClicked}></SpeedDialAction>
       </div>
     );

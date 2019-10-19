@@ -1,0 +1,45 @@
+$cn: 'top-bar';
+$cn-bgc: $bar-bgc;
+$cn-c: $header-c;
+
+.#{$cn} {
+  color: $cn-c;
+  padding: $gutter / 8 $gutter / 4 0 $gutter / 4;
+  display: flex;
+
+  .#{$cn}__logo {
+    width: auto;
+    height: 14px;
+  }
+
+  &__left {
+    margin-left: $gutter / 4;
+  }
+
+  &__right {
+    margin-left: auto;
+    margin-right: $gutter / 4;
+
+    svg {
+      margin-right: 3px;
+    }
+  }
+
+  &__link {
+    color: $cn-c;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &.is-active {
+      color: $primary;
+    }
+  }
+
+  body.dark-mode & {
+    $cn-c: #afafaf;
+    color: $cn-c;
+  }
+}
