@@ -1,0 +1,39 @@
+$cn: 'bottom-nav';
+
+$cn-h: 50px;
+$cn-bgc: #f8f8f8;
+
+.#{$cn} {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $cn-h;
+  display: flex;
+  align-items: center;
+  background-color: $cn-bgc;
+  border-top: 1px solid darken($cn-bgc, 10%);
+
+  &__item {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: $cn-h;
+  }
+
+  &__item-link {
+    color: $body-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &.is-active {
+      color: $primary;
+      font-weight: bold;
+    }
+  }
+}
