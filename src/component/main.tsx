@@ -49,7 +49,7 @@ export default class MainPage extends React.Component<IAppProps> {
                 <DiaryPage currentDate={this.state.currentDate} />
               </Route>
               <Route exact path="/medication">
-                <MedicationPage />
+                <MedicationPage currentDate={this.state.currentDate} />
               </Route>
               <Route exact path="/findings">
                 <FindingsPage currentDate={this.state.currentDate} />
