@@ -20,7 +20,9 @@ const store: any = {
     //   .set('m', 0)
     //   .set('s', 0)
     //   .set('ms', 0);
-    const medicationPortionDataQuery = bless.DataQueryBuilder.create().setSortBy('startDate DESC');
+    const medicationPortionDataQuery = bless.DataQueryBuilder.create()
+      .setPageSize(50)
+      .setSortBy('startDate DESC');
     return bless.Data.of('medication_portion')
       .find(medicationPortionDataQuery)
       .then(data => {
@@ -85,13 +87,20 @@ export default class MedicationPage extends React.Component<IMedicationPageProps
   public render() {
     return (
       <div className="medication">
-        <React.Fragment>
-          <Scheduler ref={this.scheduler} dataSource={store} views={activeViews} defaultCurrentView={'day'} firstDayOfWeek={1} startDayHour={4} showAllDayPanel={false}>
-            <Resource dataSource={this.state.medication} fieldExpr={'medicationId'} label={'Drug'} />
-            <Resource dataSource={this.state.medication_taken} allowMultiple={false} fieldExpr={'medication_takenId'} label={'Status'} useColorAsDefault={true} />
-            <SpeedDialAction icon={'plus'} onClick={this.showAppointmentPopup} />
-          </Scheduler>
-        </React.Fragment>
+        <Scheduler
+          ref={this.scheduler}
+          dataSource={store}
+          views={activeViews}
+          defaultCurrentView={'day'}
+          firstDayOfWeek={1}
+          startDayHour={4}
+          showAllDayPanel={false}
+          onAppointmentFormOpening={this.onAppointmentFormOpening}
+        >
+          <Resource dataSource={this.state.medication} fieldExpr={'medicationId'} label={'Drug'} />
+          <Resource dataSource={this.state.medication_taken} allowMultiple={false} fieldExpr={'medication_takenId'} label={'Status'} useColorAsDefault={true} />
+          <SpeedDialAction icon={'plus'} onClick={this.showAppointmentPopup} />
+        </Scheduler>
       </div>
     );
   }
@@ -99,6 +108,22 @@ export default class MedicationPage extends React.Component<IMedicationPageProps
   showAppointmentPopup = () => {
     if (this.scheduler.current) {
       this.scheduler.current.instance.showAppointmentPopup();
+    }
+  };
+
+  onAppointmentFormOpening = (data: any) => {
+    console.log('MEDICATION updateFormFields');
+    const form = data.form;
+    const formItems = form.option('items');
+    if (formItems[formItems.length - 1] && formItems[formItems.length - 1].dataField !== 'amount') {
+      formItems.push({
+        dataField: 'amount',
+        editorType: 'dxNumberBox',
+        label: {
+          text: 'Amount'
+        }
+      });
+      form.option('items', formItems);
     }
   };
 }
