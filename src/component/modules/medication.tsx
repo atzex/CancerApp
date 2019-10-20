@@ -44,7 +44,7 @@ const store: any = {
         entrydate: moment().valueOf(),
         entrymood: 'smile'
       };
-      const retVal = await bless.Data.of('diaryentries').save(diaryEntry);
+      await bless.Data.of('diaryentries').save(diaryEntry);
       // console.log('MEDICATION store addDiaryEntry RET', retVal);
     }
     // console.log('MEDICATION store INSERT retVal', JSON.stringify(retVal));
@@ -60,7 +60,7 @@ const store: any = {
         entrydate: moment().valueOf(),
         entrymood: 'smile'
       };
-      const retVal = await bless.Data.of('diaryentries').save(diaryEntry);
+      await bless.Data.of('diaryentries').save(diaryEntry);
       // console.log('MEDICATION store addDiaryEntry RET', retVal);
     }
     // console.log('MEDICATION store INSERT retVal', JSON.stringify(retValSched));
