@@ -13,21 +13,13 @@ export interface IMedicationPageProps {
 const store: any = {
   key: 'objectId',
   load: (loadOptions: any) => {
-    const today = moment()
-      .set('h', 0)
-      .set('m', 0)
-      .set('s', 0)
-      .set('ms', 0);
-    const medicationPortionDataQuery = bless.DataQueryBuilder.create()
-      .setSortBy('startDate DESC')
-      .setWhereClause(
-        'startDate >= ' +
-          today +
-          'and startDate < ' +
-          moment(today)
-            .add(1, 'd')
-            .valueOf()
-      );
+    // console.log('MEDICATION store LOAD loadOptions', JSON.stringify(loadOptions));
+    // const currentDay = moment(loadOptions.dxScheduler.startDate)
+    //   .set('h', 0)
+    //   .set('m', 0)
+    //   .set('s', 0)
+    //   .set('ms', 0);
+    const medicationPortionDataQuery = bless.DataQueryBuilder.create().setSortBy('startDate DESC');
     return bless.Data.of('medication_portion')
       .find(medicationPortionDataQuery)
       .then(data => {
@@ -39,15 +31,24 @@ const store: any = {
         throw 'Data Loading Error';
       });
   },
-  insert: (values: any) => {
-    // ...
+  insert: async (values: any) => {
+    // console.log('MEDICATION store INSERT values', JSON.stringify(values));
+    delete values['objectId'];
+    const retVal = await bless.Data.of('medication_portion').save(values);
+    // console.log('MEDICATION store INSERT retVal', JSON.stringify(retVal));
+    // return Promise.resolve();
   },
-  update: (key: string, values: any) => {
-    console.log('!!!!!!!!!!!!WERTE!!!', key, JSON.stringify(values));
-    return Promise.resolve();
+  update: async (key: string, values: any) => {
+    // console.log('MEDICATION store UPDATE key Values', key, JSON.stringify(values));
+    const retValSched = await bless.Data.of('medication_portion').save(values);
+    // console.log('MEDICATION store INSERT retVal', JSON.stringify(retValSched));
+    // return Promise.resolve();
   },
-  remove: (key: string) => {
-    // ...
+  remove: async (key: string) => {
+    // console.log('MEDICATION store REMOVE key', key);
+    const retVal = await bless.Data.of('medication_portion').remove(key);
+    // console.log('MEDICATION store REMOVE retVal', JSON.stringify(retVal));
+    // return Promise.resolve();
   }
 };
 
