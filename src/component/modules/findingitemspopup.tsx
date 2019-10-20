@@ -45,7 +45,7 @@ export default class FindingItemsPopupComponent extends React.Component<IFinding
             this.state.findingfiles.map((ff: any) => {
               return (
                 <div className="findings-detail__entry" key={ff.objectId}>
-                  <a href={ff.file} target="_blank" className="btn btn-primary">
+                  <a href={ff.file} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                     {ff.filename}
                   </a>
                 </div>
