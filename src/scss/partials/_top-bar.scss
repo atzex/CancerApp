@@ -12,6 +12,10 @@ $cn-c: $header-c;
     height: 14px;
   }
 
+  // .header--small.header--no-border & {
+  //   border: 1px solid red;
+  // }
+
   &__left {
     margin-left: $gutter / 4;
   }
