@@ -26,9 +26,7 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
             <div className="col-12 text-center">
               <p>Your selected language:</p>
               <select className="form-control" defaultValue="0" id="inputGroupSelect01">
-                <option selected value="0">
-                  English
-                </option>
+                <option value="0">English</option>
                 <option value="1">German</option>
                 <option value="2">French</option>
                 <option value="3">Chinese</option>
