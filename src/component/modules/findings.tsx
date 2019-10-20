@@ -122,8 +122,16 @@ export default class FindingsPage extends React.Component<IFindingsPageProps> {
               {this.state.addNew && (
                 <div className="findings__new-entry">
                   <DateBox className="findings__new-entry-datebox" defaultValue={Date.now()} ref={this.dateboxRef} type={'date'} />
-                  <input className="findings__new-entry-text" type="text" ref={this.textboxRef} />
-                  <input className="findings__new-entry-file" ref={this.inputfileRef} type="file" multiple />
+                  <input className="findings__new-entry-text" type="text" ref={this.textboxRef} placeholder="Please add tags..." />
+                  {/* <input className="findings__new-entry-file" ref={this.inputfileRef} type="file" multiple /> */}
+                  <div className="input-group">
+                    <div className="custom-file">
+                      <input ref={this.inputfileRef} type="file" multiple className="custom-file-input" id="findingsFiles" aria-describedby="findingsFiles" />
+                      <label className="custom-file-label" htmlFor="findingsFiles">
+                        Browse
+                      </label>
+                    </div>
+                  </div>
                   <Button className="btn btn-primary has-gradient btn-block btn-lg" onClick={this.onSaveButtonClicked}>
                     Save
                   </Button>

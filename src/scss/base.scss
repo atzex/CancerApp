@@ -7,5 +7,56 @@
 }
 
 body.dark-mode {
+  // @import url('https://cdn3.devexpress.com/jslib/19.1.7/css/dx.darkviolet.css');
   background-color: $body-bg-dm;
+
+  .dx-fa-button-icon {
+    color: #fff;
+  }
+
+  .form-control {
+    background-color: #17171f;
+    border-color: #343840;
+    color: #fff;
+  }
+
+  .custom-file-label {
+    background-color: #17171f;
+    border-color: #343840;
+    color: #fff;
+
+    &:after {
+      background-color: lighten(#17171f, 10%);
+      border-color: #343840;
+      color: #fff;
+    }
+  }
+
+  // .dx-overlay-shader {
+  //   background-color: rgba($body-bg-dm, 0.95);
+  // }
+
+  // .dx-popup-normal {
+  //   background: lighten($body-bg-dm, 10%);
+  //   border-color: lighten(invert($border-color), 10%);
+  // }
+
+  // .dx-popup-title {
+  //   color: #fff;
+  //   border-color: lighten(invert($border-color), 10%);
+
+  //   .dx-icon.dx-icon-close {
+  //     color: #fff;
+  //   }
+  // }
+
+  // .dx-popup-content {
+  //   color: #fff;
+  // }
+
+  // .dx-button:not(.dx-closebutton):not(.top-nav__button) {
+  //   background-color: #000;
+  //   border-color: lighten(invert($border-color), 10%);
+  //   color: #fff;
+  // }
 }

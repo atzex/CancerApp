@@ -63,7 +63,7 @@ export default class MedicationPage extends React.Component<IMedicationPageProps
     processing: false,
     medication: [],
     medication_portion: [],
-    medication_taken: [{ text: 'Not Taken', id: 1, color: '#fc0303' }, { text: 'Taken', id: 2, color: '#03fc07' }]
+    medication_taken: [{ text: 'Not Taken', id: 1, color: '#9a75d4' }, { text: 'Taken', id: 2, color: '#46b9a5' }]
   };
 
   loadData = async (date: number) => {
@@ -84,13 +84,15 @@ export default class MedicationPage extends React.Component<IMedicationPageProps
 
   public render() {
     return (
-      <React.Fragment>
-        <Scheduler ref={this.scheduler} dataSource={store} views={activeViews} defaultCurrentView={'day'} firstDayOfWeek={1} startDayHour={4} showAllDayPanel={false}>
-          <Resource dataSource={this.state.medication} fieldExpr={'medicationId'} label={'Drug'} />
-          <Resource dataSource={this.state.medication_taken} allowMultiple={false} fieldExpr={'medication_takenId'} label={'Status'} useColorAsDefault={true} />
-          <SpeedDialAction icon={'plus'} onClick={this.showAppointmentPopup} />
-        </Scheduler>
-      </React.Fragment>
+      <div className="medication">
+        <React.Fragment>
+          <Scheduler ref={this.scheduler} dataSource={store} views={activeViews} defaultCurrentView={'day'} firstDayOfWeek={1} startDayHour={4} showAllDayPanel={false}>
+            <Resource dataSource={this.state.medication} fieldExpr={'medicationId'} label={'Drug'} />
+            <Resource dataSource={this.state.medication_taken} allowMultiple={false} fieldExpr={'medication_takenId'} label={'Status'} useColorAsDefault={true} />
+            <SpeedDialAction icon={'plus'} onClick={this.showAppointmentPopup} />
+          </Scheduler>
+        </React.Fragment>
+      </div>
     );
   }
 

@@ -15,6 +15,10 @@ config({
 
 const App: React.FC = () => {
   if (localStorage.darkMode === 'true') {
+    let tag = document.getElementById('dxtheme');
+    if (tag) {
+      tag.setAttribute('href', 'https://cdn3.devexpress.com/jslib/19.1.7/css/dx.darkviolet.css');
+    }
     document.body.classList.add('dark-mode');
   }
 

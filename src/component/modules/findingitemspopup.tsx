@@ -35,16 +35,23 @@ export default class FindingItemsPopupComponent extends React.Component<IFinding
         visible={true}
         closeOnOutsideClick={true}
         showCloseButton={true}
+        title="Findings"
         onHidden={() => {
           this.props.onClose && this.props.onClose();
         }}
       >
-        <ul>
+        <div className="findings-detail">
           {this.state.findingfiles &&
             this.state.findingfiles.map((ff: any) => {
-              return <li key={ff.objectId}>{ff.filename}</li>;
+              return (
+                <div className="findings-detail__entry" key={ff.objectId}>
+                  <a href={ff.filename} className="btn btn-primary">
+                    {ff.filename}
+                  </a>
+                </div>
+              );
             })}
-        </ul>
+        </div>
       </Popup>
     );
   }
