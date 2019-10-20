@@ -1,0 +1,30 @@
+$cn: 'medication';
+
+.#{$cn} {
+  .dx-loadpanel {
+    .dx-loadpanel-wrapper {
+      background-color: transparent !important;
+      transform: none !important;
+
+      .dx-loadpanel-content {
+        color: #fff;
+        position: fixed !important;
+        top: 50vh !important;
+        left: 50% !important;
+        margin-left: -(222px / 2) !important;
+        margin-top: -(96px / 2) !important;
+        transform: none !important;
+
+        .dx-loadindicator-segment {
+          background: #fff;
+        }
+      }
+    }
+  }
+
+  body.dark-mode & {
+    .dx-scheduler-work-space {
+      background-color: $body-bg-dm;
+    }
+  }
+}

@@ -30,9 +30,16 @@ export default class MainPage extends React.Component<IAppProps> {
     let darkMode = localStorage.darkMode === 'true' ? true : false;
     if (darkMode !== this.state.darkMode) {
       localStorage.darkMode = this.state.darkMode;
+      let tag = document.getElementById('dxtheme');
       if (this.state.darkMode !== true) {
+        if (tag) {
+          tag.setAttribute('href', 'https://cdn3.devexpress.com/jslib/19.1.7/css/dx.softblue.css');
+        }
         document.body.classList.remove('dark-mode');
       } else {
+        if (tag) {
+          tag.setAttribute('href', 'https://cdn3.devexpress.com/jslib/19.1.7/css/dx.darkviolet.css');
+        }
         document.body.classList.add('dark-mode');
       }
     }

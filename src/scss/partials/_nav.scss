@@ -7,7 +7,7 @@ $cn-c: $nav-c;
 
 .#{$cn} {
   position: fixed;
-  z-index: 10;
+  z-index: 1000;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -55,6 +55,10 @@ $cn-c: $nav-c;
 
     &__item-link {
       color: $cn-c;
+
+      &.is-active {
+        color: lighten($primary, 20%);
+      }
     }
   }
 }

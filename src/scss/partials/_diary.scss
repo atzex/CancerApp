@@ -114,10 +114,10 @@ $cn-t-c: #979797;
       background-color: rgba($body-bg-dm, 0.95);
     }
 
-    &__new-entry-textarea {
-      background-color: #000;
-      border-color: lighten(#000, 10%);
-    }
+    // &__new-entry-textarea {
+    //   background-color: #000;
+    //   border-color: lighten(#000, 10%);
+    // }
 
     &__entry {
       border: 1px solid invert($border-color);
@@ -127,6 +127,10 @@ $cn-t-c: #979797;
 
       &:after {
         background-color: invert($border-color);
+      }
+
+      &:before {
+        background-color: lighten($primary, 20%);
       }
     }
 

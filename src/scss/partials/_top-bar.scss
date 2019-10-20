@@ -34,7 +34,7 @@ $cn-c: $header-c;
     }
 
     &.is-active {
-      color: $primary;
+      color: lighten($primary, 20%);
     }
   }
 
