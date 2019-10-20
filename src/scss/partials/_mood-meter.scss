@@ -1,0 +1,33 @@
+$cn: 'mood-meter';
+
+.#{$cn} {
+  display: flex;
+  align-items: center;
+  margin-bottom: $gutter / 2;
+
+  &__explaination {
+    margin-right: auto;
+  }
+
+  &__item {
+    @extend .btn;
+    @extend .btn-outline-primary;
+    margin-left: $gutter / 4;
+
+    &.is-active {
+      @extend .btn-outline-primary:hover;
+    }
+  }
+
+  //   .#{$cn}__item.#{$cn}__item--success {
+  //     @extend .btn-outline-success;
+  //   }
+
+  //   .#{$cn}__item.#{$cn}__item--danger {
+  //     @extend .btn-outline-danger;
+  //   }
+
+  //   .#{$cn}__item.#{$cn}__item--neutral {
+  //     @extend .btn-outline-warning;
+  //   }
+}

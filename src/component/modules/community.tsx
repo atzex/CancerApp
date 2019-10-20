@@ -67,7 +67,7 @@ const FacebookItem = (props: any) => {
         <Icon.Facebook />
       </div>
       <div className="community__entry-message">{item.message}</div>
-      {item.full_picture && <img className="community__entry-image" src={item.full_picture} />}
+      {item.full_picture && <img className="community__entry-image" src={item.full_picture} alt={item.from.name} />}
       <time className="community__entry-date">
         {moment
           .parseZone(item.normalizedDate.date)

@@ -23,7 +23,7 @@ $cn-t-c: #979797;
   &__new-entry-textarea {
     @extend .form-control;
     margin-bottom: $gutter / 2;
-    min-height: calc(100vh - #{$header-h} - #{$bottom-bar-h} - 64px - 64px - #{$gutter * 2});
+    min-height: calc(100vh - #{$header-h} - #{$bottom-bar-h} - 64px - 64px - #{$gutter * 2} - 39px);
   }
 
   &__entry-list {
@@ -86,6 +86,17 @@ $cn-t-c: #979797;
     }
   }
 
+  &__entry-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__entry-mood {
+    color: $body-color;
+    opacity: 0.35;
+  }
+
   &__entry-time {
     font-size: 13px;
     text-align: right;
@@ -141,6 +152,11 @@ $cn-t-c: #979797;
     &__entry-delete {
       background-color: $body-bg-dm;
       border-color: invert($border-color);
+    }
+
+    &__entry-mood {
+      color: $body-color-dm;
+      opacity: 0.35;
     }
   }
 }

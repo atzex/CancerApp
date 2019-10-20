@@ -4,6 +4,8 @@ $cn-bgc: $bar-bgc;
 $cn-c: #747474;
 
 .#{$cn} {
+  position: relative;
+  z-index: 5;
   background-color: $cn-bgc;
   border-bottom: 1px solid darken($cn-bgc, 5%);
   height: $header-h;
@@ -15,6 +17,10 @@ $cn-c: #747474;
   &.#{$cn}--no-border {
     border-bottom: 0;
   }
+
+  // &.#{$cn}--no-border.#{$cn}--small {
+  //   height: $header-sm-h - $gutter / 8;
+  // }
 
   body.dark-mode & {
     $cn-bgc: $bar-bgc-dm;

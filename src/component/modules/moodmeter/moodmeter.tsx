@@ -26,11 +26,18 @@ export default class MoodMeterComponent extends React.Component<IMoodMeterCompon
 
   public render() {
     return (
-      <React.Fragment>
-        <Icon.Frown style={{ backgroundColor: this.state.mood === 'frown' ? 'red' : undefined }} onClick={this.onChange('frown')}></Icon.Frown>
-        <Icon.Meh style={{ backgroundColor: this.state.mood === 'meh' ? 'red' : undefined }} onClick={this.onChange('meh')}></Icon.Meh>
-        <Icon.Smile style={{ backgroundColor: this.state.mood === 'smile' ? 'red' : undefined }} onClick={this.onChange('smile')}></Icon.Smile>
-      </React.Fragment>
+      <div className="mood-meter">
+        <div className="mood-meter__explaination">Your mood:</div>
+        <div className={this.state.mood === 'frown' ? 'mood-meter__item is-active' : 'mood-meter__item'}>
+          <Icon.Frown onClick={this.onChange('frown')}></Icon.Frown>
+        </div>
+        <div className={this.state.mood === 'meh' ? 'mood-meter__item is-active' : 'mood-meter__item'}>
+          <Icon.Meh onClick={this.onChange('meh')}></Icon.Meh>
+        </div>
+        <div className={this.state.mood === 'smile' ? 'mood-meter__item is-active' : 'mood-meter__item'}>
+          <Icon.Smile onClick={this.onChange('smile')}></Icon.Smile>
+        </div>
+      </div>
     );
   }
 }

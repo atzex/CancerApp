@@ -95,7 +95,12 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
                       <div className="diary__entry-message">
                         <p>{value.entry}</p>
                       </div>
-                      <time className="diary__entry-time">{moment(value.entrydate).format('hh:mm:ss a')}</time>
+                      <div className="diary__entry-footer">
+                        <div className="diary__entry-mood">
+                          <MoodIcon icon={value.entrymood} />
+                        </div>
+                        <time className="diary__entry-time">{moment(value.entrydate).format('hh:mm:ss a')}</time>
+                      </div>
                       <Button className="diary__entry-delete" onClick={this.onDeleteButtonClicked(value.objectId)}>
                         <Icon.Trash2 />
                       </Button>
@@ -111,3 +116,15 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
     );
   }
 }
+
+const MoodIcon = (props: any) => {
+  if (!props) return null;
+  let icon = props.icon;
+  return (
+    <React.Fragment>
+      {icon === 'smile' && <Icon.Smile size={20} />}
+      {icon === 'meh' && <Icon.Meh size={20} />}
+      {icon === 'frown' && <Icon.Frown size={20} />}
+    </React.Fragment>
+  );
+};

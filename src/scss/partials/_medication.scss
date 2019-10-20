@@ -1,9 +1,58 @@
 $cn: 'medication';
+$cn-c: $header-c;
 
 .#{$cn} {
+  //   margin-top: -4px;
   padding-bottom: $bottom-bar-h;
-  overflow-y: auto;
-  max-height: calc(100vh - #{$bottom-bar-h} - #{$header-sm-h});
+
+  .dx-scheduler {
+    .dx-scheduler-header {
+      background-color: transparent;
+      border: 0;
+      background-color: $bar-bgc;
+      border-bottom: 1px solid darken($cn-bgc, 5%);
+      height: 52px;
+
+      .dx-scheduler-view-switcher,
+      .dx-scheduler-view-switcher-label {
+        display: none;
+      }
+
+      .dx-scheduler-navigator {
+        max-width: 100%;
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        padding: $gutter / 4;
+
+        > .dx-button {
+          background-color: transparent;
+          border: 0;
+          flex: 0 1 0%;
+
+          .dx-icon {
+            margin: 0 $gutter / 8;
+            color: $cn-c;
+          }
+        }
+
+        > .dx-scheduler-navigator-caption {
+          font-weight: bold;
+          flex: 1 1 auto;
+          margin: 0 $gutter / 2;
+          font-family: $font-family-base;
+          font-size: $font-size-base;
+          color: darken($cn-c, 20%);
+        }
+      }
+    }
+
+    .dx-scheduler-work-space {
+      overflow-y: auto;
+      max-height: calc(100vh - #{$bottom-bar-h} - #{$header-sm-h});
+    }
+  }
 
   .dx-loadpanel {
     .dx-loadpanel-wrapper {
@@ -27,8 +76,30 @@ $cn: 'medication';
   }
 
   body.dark-mode & {
+    $cn-c: $header-c-dm;
+    $cn-bgc: $bar-bgc-dm;
+
     .dx-scheduler-work-space {
       background-color: $body-bg-dm;
+    }
+
+    .dx-scheduler {
+      .dx-scheduler-header {
+        background-color: $bar-bgc-dm;
+        border-bottom: 1px solid lighten($cn-bgc, 5%);
+
+        .dx-scheduler-navigator {
+          > .dx-button {
+            .dx-icon {
+              color: $cn-c;
+            }
+          }
+
+          > .dx-scheduler-navigator-caption {
+            color: lighten($cn-c, 20%);
+          }
+        }
+      }
     }
   }
 }
