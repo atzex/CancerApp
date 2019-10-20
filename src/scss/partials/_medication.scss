@@ -5,6 +5,10 @@ $cn-c: $header-c;
   //   margin-top: -4px;
   padding-bottom: $bottom-bar-h;
 
+  .dx-scheduler-scrollable-appointments {
+    padding-right: $gutter / 2;
+  }
+
   .dx-scheduler {
     .dx-scheduler-header {
       background-color: transparent;
