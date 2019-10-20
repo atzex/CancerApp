@@ -55,6 +55,11 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
     }
   }
 
+  format(value: number | Date) {
+    const retVal = moment(value).format('DD MMMM YYYY');
+    return retVal;
+  }
+
   public render() {
     let headerStyle;
     switch (this.state.navActive) {
@@ -85,7 +90,15 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
             <Button className="top-nav__button" onClick={this.buttonLeftClick}>
               <Icon.ChevronLeft />
             </Button>
-            <DateBox value={this.state.current} type={'date'} />
+            <DateBox
+              value={this.state.current}
+              onValueChanged={e => {
+                if (this.state.current !== e.value) {
+                  this.setDate(e.value as number);
+                }
+              }}
+              displayFormat={this.format}
+            />
             <Button className="top-nav__button" onClick={this.buttonRightClick}>
               <Icon.ChevronRight />
             </Button>
