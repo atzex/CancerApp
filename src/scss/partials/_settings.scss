@@ -4,6 +4,8 @@ $cn: 'settings';
   background: $primary-gradient;
   min-height: 100vh;
   color: #fff;
+  // overflow-y: auto;
+  // max-height: calc(100vh - #{$bottom-bar-h} - #{$header-sm-h});
 
   > .container {
     padding-top: $gutter;

@@ -8,9 +8,21 @@ $cn-c: #747474;
   border-bottom: 1px solid darken($cn-bgc, 5%);
   height: $header-h;
 
+  &.#{$cn}--small {
+    height: $header-sm-h;
+  }
+
+  &.#{$cn}--no-border {
+    border-bottom: 0;
+  }
+
   body.dark-mode & {
     $cn-bgc: $bar-bgc-dm;
     background-color: $cn-bgc;
     border-bottom: 1px solid lighten($cn-bgc, 5%);
+
+    &.#{$cn}--no-border {
+      border-bottom: 0;
+    }
   }
 }
