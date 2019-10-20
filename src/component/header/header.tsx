@@ -56,7 +56,7 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
   }
 
   format(value: number | Date) {
-    const retVal = moment(value).format('DD MMMM YYYY');
+    const retVal = moment(value).format('DD MMM YYYY');
     return retVal;
   }
 
