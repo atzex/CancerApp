@@ -9,14 +9,14 @@ import { NavLink } from 'react-router-dom';
 export interface IHeaderComponentProps {
   onDateChange: (value: number) => void;
   darkMode: boolean;
-  navActive?: boolean;
+  navActive?: number;
 }
 
 export default class HeaderComponent extends React.Component<IHeaderComponentProps> {
   state = {
     current: 0,
     logoType: this.props.darkMode === true ? logoDarkMode : logo,
-    navActive: false
+    navActive: 0
   };
 
   buttonLeftClick = () => {
@@ -56,8 +56,20 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
   }
 
   public render() {
+    let headerStyle;
+    switch (this.state.navActive) {
+      case 0:
+        headerStyle = 'header';
+        break;
+      case 1:
+        headerStyle = 'header header--small header--no-border';
+        break;
+      case 2:
+        headerStyle = 'header header--small';
+        break;
+    }
     return (
-      <header className={this.state.navActive ? 'header' : 'header-small'}>
+      <header className={headerStyle}>
         <div className="top-bar">
           <div className="top-bar__left">
             <img src={this.state.logoType} className="top-bar__logo" alt="BASTION - A Cancer Management Application" />
@@ -68,7 +80,7 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
             </NavLink>
           </div>
         </div>
-        {this.state.navActive && (
+        {!this.state.navActive && (
           <div className="top-nav">
             <Button className="top-nav__button" onClick={this.buttonLeftClick}>
               <Icon.ChevronLeft />

@@ -17,7 +17,7 @@ export default class MainPage extends React.Component<IAppProps> {
     currentDate: 0,
     loggedIn: localStorage.login,
     darkMode: localStorage.darkMode === 'true' ? true : false,
-    navActive: false
+    navActive: 0
   };
 
   changeDate = (date: number) => {
@@ -57,7 +57,7 @@ export default class MainPage extends React.Component<IAppProps> {
                 <DiaryPage
                   currentDate={this.state.currentDate}
                   onMount={() => {
-                    this.setState({ navActive: true });
+                    this.setState({ navActive: 0 });
                   }}
                 />
               </Route>
@@ -65,7 +65,7 @@ export default class MainPage extends React.Component<IAppProps> {
                 <MedicationPage
                   currentDate={this.state.currentDate}
                   onMount={() => {
-                    this.setState({ navActive: false });
+                    this.setState({ navActive: 1 });
                   }}
                 />
               </Route>
@@ -73,14 +73,14 @@ export default class MainPage extends React.Component<IAppProps> {
                 <FindingsPage
                   currentDate={this.state.currentDate}
                   onMount={() => {
-                    this.setState({ navActive: true });
+                    this.setState({ navActive: 0 });
                   }}
                 />
               </Route>
               <Route exact path="/community">
                 <CommunityPage
                   onMount={() => {
-                    this.setState({ navActive: false });
+                    this.setState({ navActive: 2 });
                   }}
                 />
               </Route>
@@ -88,7 +88,16 @@ export default class MainPage extends React.Component<IAppProps> {
                 exact
                 path="/settings"
                 component={(props: any) => {
-                  return <SettingsPage darkMode={this.state.darkMode} stateCallback={this.stateCallback} {...props} />;
+                  return (
+                    <SettingsPage
+                      onMount={() => {
+                        this.setState({ navActive: 2 });
+                      }}
+                      darkMode={this.state.darkMode}
+                      stateCallback={this.stateCallback}
+                      {...props}
+                    />
+                  );
                 }}
               ></Route>
             </Switch>

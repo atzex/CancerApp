@@ -1,6 +1,10 @@
 $cn: 'medication';
 
 .#{$cn} {
+  padding-bottom: $bottom-bar-h;
+  overflow-y: auto;
+  max-height: calc(100vh - #{$bottom-bar-h} - #{$header-sm-h});
+
   .dx-loadpanel {
     .dx-loadpanel-wrapper {
       background-color: transparent !important;

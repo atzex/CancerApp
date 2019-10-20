@@ -4,6 +4,7 @@ export interface ISettingsPageProps {
   stateCallback(obj: {}): void;
   darkMode: boolean;
   history?: any;
+  onMount?: () => void;
 }
 
 export default class SettingsPage extends React.Component<ISettingsPageProps> {
@@ -12,6 +13,10 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
   };
 
   loginEmail = localStorage.loginEmail ? localStorage.loginEmail : 'demo@bastion.de';
+
+  componentDidMount() {
+    this.props.onMount && this.props.onMount();
+  }
 
   public render() {
     return (
