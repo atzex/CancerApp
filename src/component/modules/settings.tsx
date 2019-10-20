@@ -24,7 +24,7 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <button type="button" className="btn btn-primary has-gradient has-shadow btn-block btn-lg" onClick={this.toggleDarkMode()}>
+              <button type="button" className="btn btn-primary has-gradient has-shadow btn-block btn-lg" onClick={this.toggleDarkMode}>
                 {this.state.darkMode === true ? 'Deactivate' : 'Activate'} Dark Mode
               </button>
             </div>
@@ -34,7 +34,7 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
               <p>
                 You are signed in as: <strong>{this.loginEmail}</strong>
               </p>
-              <button type="button" className="btn btn-primary has-gradient has-shadow btn-block btn-lg" onClick={this.signOut()}>
+              <button type="button" className="btn btn-primary has-gradient has-shadow btn-block btn-lg" onClick={this.signOut}>
                 Sign Out
               </button>
             </div>
@@ -45,18 +45,14 @@ export default class SettingsPage extends React.Component<ISettingsPageProps> {
   }
 
   toggleDarkMode = () => {
-    return (e: any) => {
-      this.setState({ darkMode: !this.state.darkMode });
-      this.props.stateCallback && this.props.stateCallback({ darkMode: !this.state.darkMode });
-    };
+    this.setState({ darkMode: !this.state.darkMode });
+    this.props.stateCallback && this.props.stateCallback({ darkMode: !this.state.darkMode });
   };
 
   signOut = () => {
-    return (e: any) => {
-      localStorage.removeItem('login');
-      localStorage.removeItem('loginEmail');
-      this.props.stateCallback && this.props.stateCallback({ loggedIn: false });
-      this.props.history.push('/');
-    };
+    localStorage.removeItem('login');
+    localStorage.removeItem('loginEmail');
+    this.props.stateCallback && this.props.stateCallback({ loggedIn: false });
+    this.props.history.push('/');
   };
 }

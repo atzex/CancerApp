@@ -91,6 +91,7 @@ export default class MainPage extends React.Component<IAppProps> {
                   return (
                     <SettingsPage
                       onMount={() => {
+                        if (this.state.navActive === 2) return;
                         this.setState({ navActive: 2 });
                       }}
                       darkMode={this.state.darkMode}
