@@ -3,7 +3,6 @@ import bless from 'backendless';
 import moment from 'moment';
 import Scheduler, { Resource } from 'devextreme-react/scheduler';
 import SpeedDialAction from 'devextreme-react/speed-dial-action';
-import CustomStore from 'devextreme/data/custom_store';
 import { RefObject } from 'react';
 
 export interface IMedicationPageProps {
@@ -31,25 +30,25 @@ const store: any = {
         };
       })
       .catch(() => {
-        throw 'Data Loading Error';
+        throw new Error('Data Loading Error');
       });
   },
   insert: async (values: any) => {
     // console.log('MEDICATION store INSERT values', JSON.stringify(values));
     delete values['objectId'];
-    const retVal = await bless.Data.of('medication_portion').save(values);
+    await bless.Data.of('medication_portion').save(values);
     // console.log('MEDICATION store INSERT retVal', JSON.stringify(retVal));
     // return Promise.resolve();
   },
   update: async (key: string, values: any) => {
     // console.log('MEDICATION store UPDATE key Values', key, JSON.stringify(values));
-    const retValSched = await bless.Data.of('medication_portion').save(values);
+    await bless.Data.of('medication_portion').save(values);
     // console.log('MEDICATION store INSERT retVal', JSON.stringify(retValSched));
     // return Promise.resolve();
   },
   remove: async (key: string) => {
     // console.log('MEDICATION store REMOVE key', key);
-    const retVal = await bless.Data.of('medication_portion').remove(key);
+    await bless.Data.of('medication_portion').remove(key);
     // console.log('MEDICATION store REMOVE retVal', JSON.stringify(retVal));
     // return Promise.resolve();
   }
