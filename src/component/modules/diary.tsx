@@ -3,6 +3,7 @@ import bless from 'backendless';
 import moment from 'moment';
 import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
 import { Button } from 'devextreme-react';
+import * as Icon from 'react-feather';
 
 export interface IDiaryPageProps {
   currentDate: number;
@@ -67,6 +68,17 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
     }
   };
 
+  onDeleteButtonClicked = (findingId: string) => {
+    // TODO: Kenne die Daten nicht, bitte anpassen @Chris
+    return async (e: any) => {
+      console.log(findingId);
+      // e && e.event && e.event.stopPropagation();
+      // await bless.Data.of('diaryentries').bulkDelete("findingref = '" + findingId + "'");
+      // await bless.Data.of('diaryentries').remove(findingId);
+      // this.loadData(this.props.currentDate);
+    };
+  };
+
   public render() {
     return (
       <div className="diary">
@@ -93,6 +105,9 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
                         <p>{value.entry}</p>
                       </div>
                       <time className="diary__entry-time">{moment(value.entrydate).format('hh:mm:ss a')}</time>
+                      <Button className="findings__entry-delete" onClick={this.onDeleteButtonClicked(value.objectId)}>
+                        <Icon.Trash2 />
+                      </Button>
                     </div>
                   );
                 })}

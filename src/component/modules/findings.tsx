@@ -2,6 +2,7 @@ import * as React from 'react';
 import bless from 'backendless';
 import moment from 'moment';
 import { Button, SpeedDialAction, DateBox } from 'devextreme-react';
+import * as Icon from 'react-feather';
 
 import FindingItemsPopupComponent from './findingitemspopup';
 
@@ -112,40 +113,56 @@ export default class FindingsPage extends React.Component<IFindingsPageProps> {
 
   public render() {
     return (
-      <div>
-        {this.state.addNew && (
-          <div>
-            <DateBox defaultValue={Date.now()} ref={this.dateboxRef} type={'date'} />
-            <input type="text" ref={this.textboxRef} />
-            <input ref={this.inputfileRef} type="file" multiple />
-            <Button onClick={this.onCancelButtonClicked}>Cancel</Button>
-            <Button onClick={this.onSaveButtonClicked}>Save</Button>
-            {this.state.processing && <span>Doing things ... </span>}
+      <div className="findings">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              {this.state.addNew && (
+                <div className="findings__new-entry">
+                  <DateBox className="findings__new-entry-datebox" defaultValue={Date.now()} ref={this.dateboxRef} type={'date'} />
+                  <input className="findings__new-entry-text" type="text" ref={this.textboxRef} />
+                  <input className="findings__new-entry-file" ref={this.inputfileRef} type="file" multiple />
+                  <Button className="btn btn-primary has-gradient btn-block btn-lg" onClick={this.onSaveButtonClicked}>
+                    Save
+                  </Button>
+                  <Button className="btn btn-link btn-block btn-lg" onClick={this.onCancelButtonClicked}>
+                    Cancel
+                  </Button>
+                  {this.state.processing && <span>Doing things ... </span>}
+                </div>
+              )}
+              <div className="findings__entry-list">
+                {this.state.findings.map((value: any) => {
+                  return (
+                    <div
+                      className="findings__entry"
+                      key={value.objectId}
+                      onClick={() => {
+                        this.setState({ findingToLoad: value.objectId });
+                      }}
+                    >
+                      <div className="findings__entry-message">
+                        <p>{value.findingtags}</p>
+                      </div>
+                      <time className="findings__entry-time">{moment(value.findingdate).format('hh:mm:ss a')}</time>
+                      <Button className="findings__entry-delete" onClick={this.onDeleteButtonClicked(value.objectId)}>
+                        <Icon.Trash2 />
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
+              {this.state.findingToLoad && (
+                <FindingItemsPopupComponent
+                  findingToLoad={this.state.findingToLoad}
+                  onClose={() => {
+                    this.setState({ findingToLoad: '' });
+                  }}
+                />
+              )}
+            </div>
           </div>
-        )}
-        <ul>
-          {this.state.findings.map((value: any) => {
-            return (
-              <li
-                key={value.objectId}
-                onClick={() => {
-                  this.setState({ findingToLoad: value.objectId });
-                }}
-              >
-                {value.findingdate} - {value.findingtags}
-                <Button onClick={this.onDeleteButtonClicked(value.objectId)}>X</Button>
-              </li>
-            );
-          })}
-        </ul>
-        {this.state.findingToLoad && (
-          <FindingItemsPopupComponent
-            findingToLoad={this.state.findingToLoad}
-            onClose={() => {
-              this.setState({ findingToLoad: '' });
-            }}
-          />
-        )}
+        </div>
         <SpeedDialAction icon={'add'} onClick={this.onAddEntryButtonClicked}></SpeedDialAction>
       </div>
     );
