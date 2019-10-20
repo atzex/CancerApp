@@ -5,15 +5,16 @@ import { SpeedDialAction } from 'devextreme-react/speed-dial-action';
 import { Button } from 'devextreme-react';
 import * as Icon from 'react-feather';
 
+import DiaryEditComponent from './diaryedit';
+
 export interface IDiaryPageProps {
   currentDate: number;
+  onMount?: () => void;
 }
 
 export default class DiaryPage extends React.Component<IDiaryPageProps> {
-  textareaRef: React.RefObject<HTMLTextAreaElement> = React.createRef();
-
   state = {
-    addNew: false,
+    editing: false,
     processing: false,
     entries: []
   };
@@ -34,6 +35,7 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
   };
 
   componentDidMount() {
+    this.props.onMount && this.props.onMount();
     this.loadData(this.props.currentDate);
   }
 
@@ -46,36 +48,25 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
   }
 
   onAddEntryButtonClicked = () => {
-    this.setState({ addNew: true });
-    this.textareaRef.current && this.textareaRef.current.focus();
+    this.setState({ editing: {} });
   };
 
   onCancelButtonClicked = () => {
-    this.setState({ addNew: false });
+    this.setState({ editing: undefined });
   };
 
-  onSaveButtonClicked = async () => {
-    if (this.textareaRef.current) {
-      this.setState({ processing: true });
-      const newEntry = {
-        entrydate: moment().valueOf(),
-        entry: this.textareaRef.current.value
-      };
-      await bless.Data.of('diaryentries').save(newEntry);
-      this.loadData(this.props.currentDate);
-      this.setState({ addNew: false });
-      this.setState({ processing: false });
-    }
+  onSaveButtonClicked = async (data: any) => {
+    this.setState({ processing: true });
+    await bless.Data.of('diaryentries').save(data);
+    this.loadData(this.props.currentDate);
+    this.setState({ editing: undefined, processing: false });
   };
 
-  onDeleteButtonClicked = (findingId: string) => {
-    // TODO: Kenne die Daten nicht, bitte anpassen @Chris
+  onDeleteButtonClicked = (diaryId: string) => {
     return async (e: any) => {
-      console.log(findingId);
-      // e && e.event && e.event.stopPropagation();
-      // await bless.Data.of('diaryentries').bulkDelete("findingref = '" + findingId + "'");
-      // await bless.Data.of('diaryentries').remove(findingId);
-      // this.loadData(this.props.currentDate);
+      e && e.event && e.event.stopPropagation();
+      await bless.Data.of('diaryentries').remove(diaryId);
+      this.loadData(this.props.currentDate);
     };
   };
 
@@ -85,27 +76,27 @@ export default class DiaryPage extends React.Component<IDiaryPageProps> {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              {this.state.addNew && (
-                <div className="diary__new-entry">
-                  <textarea className="diary__new-entry-textarea" ref={this.textareaRef} placeholder="Please type..."></textarea>
-                  <Button className="btn btn-primary has-gradient btn-lg btn-block" onClick={this.onSaveButtonClicked}>
-                    Save
-                  </Button>
-                  <Button className="btn btn-link btn-lg btn-block" onClick={this.onCancelButtonClicked}>
-                    Cancel
-                  </Button>
+              {this.state.editing && (
+                <React.Fragment>
+                  <DiaryEditComponent diaryentry={this.state.editing} onSave={this.onSaveButtonClicked} onCancel={this.onCancelButtonClicked} />
                   {this.state.processing && <span>Doing things ... </span>}
-                </div>
+                </React.Fragment>
               )}
               <div className="diary__entry-list">
                 {this.state.entries.map((value: any) => {
                   return (
-                    <div className="diary__entry" key={value.objectId}>
+                    <div
+                      className="diary__entry"
+                      key={value.objectId}
+                      onClick={() => {
+                        this.setState({ editing: value });
+                      }}
+                    >
                       <div className="diary__entry-message">
                         <p>{value.entry}</p>
                       </div>
                       <time className="diary__entry-time">{moment(value.entrydate).format('hh:mm:ss a')}</time>
-                      <Button className="findings__entry-delete" onClick={this.onDeleteButtonClicked(value.objectId)}>
+                      <Button className="diary__entry-delete" onClick={this.onDeleteButtonClicked(value.objectId)}>
                         <Icon.Trash2 />
                       </Button>
                     </div>

@@ -9,12 +9,14 @@ import { NavLink } from 'react-router-dom';
 export interface IHeaderComponentProps {
   onDateChange: (value: number) => void;
   darkMode: boolean;
+  navActive?: boolean;
 }
 
 export default class HeaderComponent extends React.Component<IHeaderComponentProps> {
   state = {
     current: 0,
-    logoType: this.props.darkMode === true ? logoDarkMode : logo
+    logoType: this.props.darkMode === true ? logoDarkMode : logo,
+    navActive: false
   };
 
   buttonLeftClick = () => {
@@ -48,11 +50,14 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
     } else if (this.props.darkMode !== true && this.state.logoType !== logo) {
       this.setState({ logoType: logo });
     }
+    if (this.props.navActive !== this.state.navActive) {
+      this.setState({ navActive: this.props.navActive });
+    }
   }
 
   public render() {
     return (
-      <header className="header">
+      <header className={this.state.navActive ? 'header' : 'header-small'}>
         <div className="top-bar">
           <div className="top-bar__left">
             <img src={this.state.logoType} className="top-bar__logo" alt="BASTION - A Cancer Management Application" />
@@ -63,17 +68,17 @@ export default class HeaderComponent extends React.Component<IHeaderComponentPro
             </NavLink>
           </div>
         </div>
-        <div className="top-nav">
-          <Button className="top-nav__button" onClick={this.buttonLeftClick}>
-            <Icon.ChevronLeft />
-          </Button>
-          {/* <Button>-</Button> */}
-          <DateBox value={this.state.current} type={'date'} />
-          {/* <Button>+</Button> */}
-          <Button className="top-nav__button" onClick={this.buttonRightClick}>
-            <Icon.ChevronRight />
-          </Button>
-        </div>
+        {this.state.navActive && (
+          <div className="top-nav">
+            <Button className="top-nav__button" onClick={this.buttonLeftClick}>
+              <Icon.ChevronLeft />
+            </Button>
+            <DateBox value={this.state.current} type={'date'} />
+            <Button className="top-nav__button" onClick={this.buttonRightClick}>
+              <Icon.ChevronRight />
+            </Button>
+          </div>
+        )}
       </header>
     );
   }

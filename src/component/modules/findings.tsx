@@ -9,6 +9,7 @@ import FindingItemsPopupComponent from './findingitemspopup';
 export interface IFindingsPageProps {
   currentDate: number;
   location?: any;
+  onMount?: () => void;
 }
 
 export default class FindingsPage extends React.Component<IFindingsPageProps> {
@@ -43,6 +44,7 @@ export default class FindingsPage extends React.Component<IFindingsPageProps> {
 
   componentDidMount() {
     this._isMounted = true;
+    this.props.onMount && this.props.onMount();
     this.loadData(this.props.currentDate);
   }
 

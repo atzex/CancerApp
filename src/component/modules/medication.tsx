@@ -8,6 +8,7 @@ import { RefObject } from 'react';
 
 export interface IMedicationPageProps {
   currentDate: number;
+  onMount?: () => void;
 }
 
 const store: any = {
@@ -72,6 +73,7 @@ export default class MedicationPage extends React.Component<IMedicationPageProps
   };
 
   componentDidMount() {
+    this.props.onMount && this.props.onMount();
     const today = moment()
       .set('h', 0)
       .set('m', 0)

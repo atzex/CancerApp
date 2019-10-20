@@ -16,7 +16,8 @@ export default class MainPage extends React.Component<IAppProps> {
   state = {
     currentDate: 0,
     loggedIn: localStorage.login,
-    darkMode: localStorage.darkMode === 'true' ? true : false
+    darkMode: localStorage.darkMode === 'true' ? true : false,
+    navActive: false
   };
 
   changeDate = (date: number) => {
@@ -42,20 +43,39 @@ export default class MainPage extends React.Component<IAppProps> {
       <div className="App">
         {!localStorage.login && <LoginPage stateCallback={this.stateCallback} loggedIn={this.state.loggedIn} />}
         {localStorage.login === '1' && (
-          <div>
-            <HeaderComponent darkMode={this.state.darkMode} onDateChange={this.changeDate} />
+          <React.Fragment>
+            <HeaderComponent darkMode={this.state.darkMode} onDateChange={this.changeDate} navActive={this.state.navActive} />
             <Switch>
               <Route exact path="/">
-                <DiaryPage currentDate={this.state.currentDate} />
+                <DiaryPage
+                  currentDate={this.state.currentDate}
+                  onMount={() => {
+                    this.setState({ navActive: true });
+                  }}
+                />
               </Route>
               <Route exact path="/medication">
-                <MedicationPage currentDate={this.state.currentDate} />
+                <MedicationPage
+                  currentDate={this.state.currentDate}
+                  onMount={() => {
+                    this.setState({ navActive: false });
+                  }}
+                />
               </Route>
               <Route exact path="/findings">
-                <FindingsPage currentDate={this.state.currentDate} />
+                <FindingsPage
+                  currentDate={this.state.currentDate}
+                  onMount={() => {
+                    this.setState({ navActive: true });
+                  }}
+                />
               </Route>
               <Route exact path="/community">
-                <CommunityPage />
+                <CommunityPage
+                  onMount={() => {
+                    this.setState({ navActive: false });
+                  }}
+                />
               </Route>
               <Route
                 exact
@@ -66,7 +86,7 @@ export default class MainPage extends React.Component<IAppProps> {
               ></Route>
             </Switch>
             <BottomNavComponent />
-          </div>
+          </React.Fragment>
         )}
       </div>
     );
