@@ -41,7 +41,7 @@ export default class CommunityPage extends React.Component<ICommunityPageProps> 
     let res = await fetch('https://socialapi.curry-solutions.com/api/1.0/get/fb:339749056362362,fb:494492760743939/');
     if (res) {
       this.setState({ socialApiData: await res.json() });
-      console.log('Res', this.state.socialApiData);
+      // console.log('Res', this.state.socialApiData);
     } else {
       console.error('Error');
     }
