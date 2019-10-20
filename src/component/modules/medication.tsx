@@ -34,15 +34,35 @@ const store: any = {
       });
   },
   insert: async (values: any) => {
-    // console.log('MEDICATION store INSERT values', JSON.stringify(values));
+    // console.log('MEDICATION store INSERT values', values['medication_takenId'] === 2, JSON.stringify(values));
     delete values['objectId'];
     await bless.Data.of('medication_portion').save(values);
+    if (values['medication_takenId'] === 2) {
+      // console.log('MEDICATION store addDiaryEntry');
+      const diaryEntry = {
+        entry: values['text'] + ' taken',
+        entrydate: moment().valueOf(),
+        entrymood: 'smile'
+      };
+      const retVal = await bless.Data.of('diaryentries').save(diaryEntry);
+      // console.log('MEDICATION store addDiaryEntry RET', retVal);
+    }
     // console.log('MEDICATION store INSERT retVal', JSON.stringify(retVal));
     // return Promise.resolve();
   },
   update: async (key: string, values: any) => {
     // console.log('MEDICATION store UPDATE key Values', key, JSON.stringify(values));
     await bless.Data.of('medication_portion').save(values);
+    if (values['medication_takenId'] === 2) {
+      // console.log('MEDICATION store addDiaryEntry');
+      const diaryEntry = {
+        entry: values['text'] + ' taken',
+        entrydate: moment().valueOf(),
+        entrymood: 'smile'
+      };
+      const retVal = await bless.Data.of('diaryentries').save(diaryEntry);
+      // console.log('MEDICATION store addDiaryEntry RET', retVal);
+    }
     // console.log('MEDICATION store INSERT retVal', JSON.stringify(retValSched));
     // return Promise.resolve();
   },
@@ -54,7 +74,7 @@ const store: any = {
   }
 };
 
-const activeViews: any = ['day', 'week', 'month'];
+const activeViews: any = ['agenda'];
 
 export default class MedicationPage extends React.Component<IMedicationPageProps> {
   scheduler: RefObject<Scheduler> = React.createRef();
@@ -90,7 +110,7 @@ export default class MedicationPage extends React.Component<IMedicationPageProps
           ref={this.scheduler}
           dataSource={store}
           views={activeViews}
-          defaultCurrentView={'day'}
+          defaultCurrentView={'agenda'}
           firstDayOfWeek={1}
           startDayHour={4}
           showAllDayPanel={false}
