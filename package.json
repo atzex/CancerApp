@@ -14,7 +14,7 @@
     "devextreme": "^19.1.7",
     "devextreme-react": "^19.1.7",
     "moment": "^2.24.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-feather": "^2.0.3",
